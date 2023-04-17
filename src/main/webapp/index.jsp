@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.sql.*, com.patrisrikanth.techblog.helpers.ConnectionProvider" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +16,11 @@
  <script type="text/javascript" src="js/script.js" defer></script>
 </head>
 <body>
+	<h1>Hello world</h1>
+	<% 
+		Connection con = ConnectionProvider.getConnection();
+	%>
 	
+	<%= con %>
 </body>
 </html>
