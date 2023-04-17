@@ -25,11 +25,11 @@
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-sm-12 col-md-6 col-lg-4 border p-4 rounded">
-				<form action="#" method="POST">
+				<form action="RegisterServlet" method="POST">
 					<h1 class="text-center mb-2">Register Page</h1>
 					<div class="form-group mb-2">
-						<label for="username">User Name</label> <input name="username"
-							type="text" class="form-control" id="username"
+						<label for="name">User Name</label> <input name="name"
+							type="text" class="form-control" id="name"
 							aria-describedby="emailHelp" placeholder="Enter name">
 					</div>
 
@@ -47,7 +47,7 @@
 					<div class="form-group mb-2">
 						<label for="gender">Select Gender</label> <br> <input
 							type="radio" id="gender" name="gender" value="male">Male 
-						<input type="radio" id="gender" name="gender" value="famale">Female 
+						<input type="radio" id="gender" name="gender" value="female">Female 
 					</div>
 					<div class="form-group mb-2">
 						<textarea name="about" class="form-control" id="about" rows="5"
