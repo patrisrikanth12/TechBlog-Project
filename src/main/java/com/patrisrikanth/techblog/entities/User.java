@@ -9,6 +9,7 @@ public class User {
 	private String password;
 	private String gender;
 	private String about;
+	private String profile;
 	private Timestamp reg_date;
 	
 	public User() {
@@ -25,7 +26,7 @@ public class User {
 		this.about = about;
 		this.reg_date = reg_date;
 	}
-	
+
 	public User(String name, String email, String password, String gender, String about) {
 		this.name = name;
 		this.email = email;
@@ -80,6 +81,14 @@ public class User {
 
 	public void setAbout(String about) {
 		this.about = about;
+	}
+	
+	public String getProfile() {
+		return profile;
+	}
+
+	public void setProfile(String profile) {
+		this.profile = profile;
 	}
 
 	public Timestamp getReg_date() {

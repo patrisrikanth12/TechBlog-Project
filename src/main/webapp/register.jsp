@@ -25,7 +25,7 @@
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-sm-12 col-md-6 col-lg-4 border p-4 rounded">
-				<form action="RegisterServlet" method="POST">
+				<form id="form" action="RegisterServlet" method="POST">
 					<h1 class="text-center mb-2">Register Page</h1>
 					<div class="form-group mb-2">
 						<label for="name">User Name</label> <input name="name"
@@ -46,8 +46,8 @@
 					</div>
 					<div class="form-group mb-2">
 						<label for="gender">Select Gender</label> <br> <input
-							type="radio" id="gender" name="gender" value="male">Male 
-						<input type="radio" id="gender" name="gender" value="female">Female 
+							type="radio" name="gender" value="male">Male 
+						<input type="radio" name="gender" value="female">Female 
 					</div>
 					<div class="form-group mb-2">
 						<textarea name="about" class="form-control" id="about" rows="5"
@@ -71,5 +71,29 @@
 			</div>
 		</div>
 	</div>
+	<script>
+		$(document).ready(function() {
+			$("#form").on("submit" , function(event) {
+				event.preventDefault();
+				let form = new FormData(this);
+				$("#loader").show();
+				$.ajax({
+					url:"RegisterServlet",
+					type: "POST",
+					data: form,
+					success: function (data, statusText, jqXhr) {
+						console.log(data);
+						$("#loader").hide();
+					},
+					error: function (jqXhr, statusText, errorThrown) {
+						$("#loader").hide();
+						 console.log(jqXhr);
+					},
+					processData: false,
+					contentType: false 
+				})
+			})
+		})
+	</script>
 </body>
 </html>

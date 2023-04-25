@@ -25,11 +25,12 @@
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-sm-12 col-md-6 col-lg-4 border p-4 rounded">
-				<form action="#" method="POST">
+				<form action="LoginServlet" method="POST">
 					<h1 class="text-center mb-2">Login Page</h1>
+					<p id="display-msg"></p>
 					<div class="p-1 mb-2">
 						<label for="email" class="form-label">Email</label><br> <input
-							type="text" class="form-control" id="email" name="user_email"
+							type="text" class="form-control" id="email" name="email"
 							placeholder="Enter Email Address" />
 					</div>
 					<div class="p-1 mb-3">
