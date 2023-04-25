@@ -31,11 +31,14 @@
 				<h1 class="text-center mb-3">Welcome to TechBlog</h1>
 				<p class="text-center">The hassle-free blogging platform for
 					engineers, thought-leaders, and the dev community!</p>
-				<div class="d-flex flex-row justify-content-center mb-5">
-					<a href="register.jsp" class="btn btn-outline-primary mx-3">Start for
-						Free</a>
-					<a href="login.jsp" class="btn btn-outline-primary">Login</a>
+				
+				<% if(session.getAttribute("current_user") == null) { %>
+						<div class="d-flex flex-row justify-content-center mb-5">
+						<a href="register.jsp" class="btn btn-outline-primary mx-3">Start for
+							Free</a>
+						<a href="login.jsp" class="btn btn-outline-primary">Login</a>
 				</div>
+				<% } %> 
 			</section>
 			<section class="blogs-section py-1 m-0">
 			<h2 class="text-center mb-4">Blog Posts</h2>

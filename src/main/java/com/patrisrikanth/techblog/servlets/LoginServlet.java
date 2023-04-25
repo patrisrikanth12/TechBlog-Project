@@ -13,6 +13,7 @@ import java.sql.Connection;
 
 import com.patrisrikanth.techblog.dao.UserDao;
 import com.patrisrikanth.techblog.entities.User;
+import com.patrisrikanth.techblog.entities.Message;
 import com.patrisrikanth.techblog.helpers.ConnectionProvider;
 
 public class LoginServlet extends HttpServlet {
@@ -31,8 +32,10 @@ public class LoginServlet extends HttpServlet {
 			session.setAttribute("current_user", user);
 			response.sendRedirect("profile.jsp");
 		} else {
-			PrintWriter out = response.getWriter();
-			out.println("Invalid Details... please try again");
+			Message msg = new Message("Invalid details... Please try again", "error", "alert-danger");
+			HttpSession session = request.getSession();
+			session.setAttribute("message", msg);
+			response.sendRedirect("login.jsp");
 		}
 	}
 

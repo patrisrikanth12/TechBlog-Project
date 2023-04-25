@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="com.patrisrikanth.techblog.entities.Message"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,7 +28,14 @@
 			<div class="col-sm-12 col-md-6 col-lg-4 border p-4 rounded">
 				<form action="LoginServlet" method="POST">
 					<h1 class="text-center mb-2">Login Page</h1>
-					<p id="display-msg"></p>
+					<% 
+						Message msg = (Message)session.getAttribute("message");
+						if(msg != null) {
+					%>
+						<p class="alert <%= msg.getCssClass() %>"><%= msg.getData() %></p>
+					<% 
+						session.removeAttribute("message");
+						} %>
 					<div class="p-1 mb-2">
 						<label for="email" class="form-label">Email</label><br> <input
 							type="text" class="form-control" id="email" name="email"
