@@ -49,7 +49,7 @@ public class UserDao {
 				user.setPassword(set.getString("password"));
 				user.setGender(set.getString("gender"));
 				user.setAbout(set.getString("about"));
-				user.setReg_date(set.getTimestamp("reg_date"));
+				user.setRegDate(set.getTimestamp("reg_date"));
 				user.setId(set.getInt("id"));
 				user.setProfile(set.getString("profile"));
 			}
@@ -58,5 +58,25 @@ public class UserDao {
 		}
 		
 		return user;
+	}
+	
+	public boolean updateUser(User user) {
+		boolean execStatus =  false;
+		String query = "Update BlogUsers set name=?, email=?, password=?, gender=?, about=? where id=?";
+		try {
+			PreparedStatement pstmt = this.con.prepareStatement(query);
+			pstmt.setString(1, user.getName());
+			pstmt.setString(2, user.getEmail());
+			pstmt.setString(3, user.getPassword());
+			pstmt.setString(4, user.getGender());
+			pstmt.setString(5, user.getAbout());
+			pstmt.setInt(6, user.getId());
+			pstmt.executeUpdate();
+			execStatus = true;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		return execStatus;
 	}
 }

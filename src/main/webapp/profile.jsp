@@ -28,6 +28,33 @@
 <body>
 	<%@ include file="navbar.jsp" %>
 	
+	<div class="container text-center">
+		<h1 class="mt-3">Profile Info</h1>
+	<img class="img-fluid mt-2" src="img/<%= user.getProfile() %>" style="max-width: 250px" alt="profile image">
+	<table class="table mt-5">
+		<tr>
+			<td>name</td>
+			<td><%= user.getName() %></td>
+		</tr>
+		<tr>
+			<td>email</td>
+			<td><%= user.getEmail() %></td>
+		</tr>
+		<tr>
+			<td>Gender</td>
+			<td><%= user.getGender() %></td>
+		</tr>
+		<tr>
+			<td>About</td>
+			<td><%= user.getAbout() %></td>
+		</tr>
+		<tr>
+			<td>Registered on</td>
+			<td><%= user.getRegDate() %></td>
+		</tr>
+	</table>
+	<a href="edit-profile.jsp" class="btn btn-outline-primary">Edit Profile</a>
+	</div>
 	
 </body>
 </html>

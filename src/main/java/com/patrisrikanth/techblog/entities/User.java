@@ -10,21 +10,21 @@ public class User {
 	private String gender;
 	private String about;
 	private String profile;
-	private Timestamp reg_date;
+	private Timestamp regDate;
 	
 	public User() {
 		
 	}
 	
 	public User(int id, String name, String email, String password, String gender, String about,
-			Timestamp reg_date) {
+			Timestamp regDate) {
 		this.id = id;
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.gender = gender;
 		this.about = about;
-		this.reg_date = reg_date;
+		this.regDate = regDate;
 	}
 
 	public User(String name, String email, String password, String gender, String about) {
@@ -91,11 +91,11 @@ public class User {
 		this.profile = profile;
 	}
 
-	public Timestamp getReg_date() {
-		return reg_date;
+	public Timestamp getRegDate() {
+		return regDate;
 	}
 
-	public void setReg_date(Timestamp reg_date) {
-		this.reg_date = reg_date;
+	public void setRegDate(Timestamp regDate) {
+		this.regDate = regDate;
 	}
 }

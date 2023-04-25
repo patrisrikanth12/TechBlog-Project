@@ -72,28 +72,28 @@
 		</div>
 	</div>
 	<script>
-		$(document).ready(function() {
-			$("#form").on("submit" , function(event) {
-				event.preventDefault();
-				let form = new FormData(this);
-				$("#loader").show();
-				$.ajax({
-					url:"RegisterServlet",
-					type: "POST",
-					data: form,
-					success: function (data, statusText, jqXhr) {
-						console.log(data);
-						$("#loader").hide();
-					},
-					error: function (jqXhr, statusText, errorThrown) {
-						$("#loader").hide();
-						 console.log(jqXhr);
-					},
-					processData: false,
-					contentType: false 
-				})
-			})
-		})
+// 		$(document).ready(function() {
+// 			$("#form").on("submit" , function(event) {
+// 				event.preventDefault();
+// 				let form = new FormData(this);
+// 				$("#loader").show();
+// 				$.ajax({
+// 					url:"RegisterServlet",
+// 					type: "POST",
+// 					data: form,
+// 					success: function (data, statusText, jqXhr) {
+// 						console.log(data);
+// 						$("#loader").hide();
+// 					},
+// 					error: function (jqXhr, statusText, errorThrown) {
+// 						$("#loader").hide();
+// 						 console.log(jqXhr);
+// 					},
+// 					processData: false,
+// 					contentType: false 
+// 				})
+// 			})
+// 		})
 	</script>
 </body>
 </html>
