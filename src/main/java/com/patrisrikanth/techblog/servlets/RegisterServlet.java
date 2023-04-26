@@ -6,11 +6,14 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
+
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.sql.Connection;
 
 import com.patrisrikanth.techblog.dao.UserDao;
+import com.patrisrikanth.techblog.entities.Message;
 import com.patrisrikanth.techblog.entities.User;
 import com.patrisrikanth.techblog.helpers.ConnectionProvider;
 
@@ -37,12 +40,16 @@ public class RegisterServlet extends HttpServlet {
 		
 		boolean execStatus = userDao.saveUser(user);
 		
-		PrintWriter out = response.getWriter();
-		
 		if(!execStatus) {
-			out.println("registation Failed");
+			Message msg = new Message("Something went wrong... please try again!", "error", "alert-danger");
+			HttpSession session = request.getSession();
+			session.setAttribute("message", msg);
+			response.sendRedirect("register.jsp");
 		} else {
-			out.println(name + " " + email + " " + password + " " + gender + " " + about + " " + check);
+			Message msg = new Message("Registration Successful", "info", "alert-info");
+			HttpSession session = request.getSession();
+			session.setAttribute("message", msg);
+			response.sendRedirect("login.jsp");
 		}
 	}
 

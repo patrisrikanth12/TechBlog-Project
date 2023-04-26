@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"
+	import="com.patrisrikanth.techblog.entities.Message"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,27 +28,35 @@
 			<div class="col-sm-12 col-md-6 col-lg-4 border p-4 rounded">
 				<form id="form" action="RegisterServlet" method="POST">
 					<h1 class="text-center mb-2">Register Page</h1>
+					<%
+						if (session.getAttribute("message") != null) {
+							Message msg = (Message) session.getAttribute("message");
+					%>
+						<p class="alert <%=msg.getCssClass()%>"><%=msg.getData()%></p>
+					<%
+							session.removeAttribute("message");
+						}
+					%>
 					<div class="form-group mb-2">
-						<label for="name">User Name</label> <input name="name"
-							type="text" class="form-control" id="name"
-							aria-describedby="emailHelp" placeholder="Enter name">
+						<label for="name">User Name</label> <input name="name" type="text"
+							class="form-control" id="name" aria-describedby="emailHelp"
+							placeholder="Enter name">
 					</div>
 
 					<div class="form-group mb-2">
-						<label for="email">Email address</label> <input
-							name="email" type="email" class="form-control"
-							id="email" aria-describedby="emailHelp"
-							placeholder="Enter email"> 
+						<label for="email">Email address</label> <input name="email"
+							type="email" class="form-control" id="email"
+							aria-describedby="emailHelp" placeholder="Enter email">
 					</div>
 					<div class="form-group  mb-2">
-						<label for="password">Password</label> <input
-							name="password" type="password" class="form-control"
-							id="password" placeholder="Password">
+						<label for="password">Password</label> <input name="password"
+							type="password" class="form-control" id="password"
+							placeholder="Password">
 					</div>
 					<div class="form-group mb-2">
 						<label for="gender">Select Gender</label> <br> <input
-							type="radio" name="gender" value="male">Male 
-						<input type="radio" name="gender" value="female">Female 
+							type="radio" name="gender" value="male">Male <input
+							type="radio" name="gender" value="female">Female
 					</div>
 					<div class="form-group mb-2">
 						<textarea name="about" class="form-control" id="about" rows="5"
@@ -55,8 +64,8 @@
 					</div>
 					<div class="form-check mb-2">
 						<input name="check" type="checkbox" class="form-check-input"
-							id="check"> <label class="form-check-label"
-							for="check">agree terms and conditions</label>
+							id="check"> <label class="form-check-label" for="check">agree
+							terms and conditions</label>
 					</div>
 					<br>
 					<div class="container text-center mb-2" id="loader"
@@ -72,28 +81,28 @@
 		</div>
 	</div>
 	<script>
-// 		$(document).ready(function() {
-// 			$("#form").on("submit" , function(event) {
-// 				event.preventDefault();
-// 				let form = new FormData(this);
-// 				$("#loader").show();
-// 				$.ajax({
-// 					url:"RegisterServlet",
-// 					type: "POST",
-// 					data: form,
-// 					success: function (data, statusText, jqXhr) {
-// 						console.log(data);
-// 						$("#loader").hide();
-// 					},
-// 					error: function (jqXhr, statusText, errorThrown) {
-// 						$("#loader").hide();
-// 						 console.log(jqXhr);
-// 					},
-// 					processData: false,
-// 					contentType: false 
-// 				})
-// 			})
-// 		})
+		// 		$(document).ready(function() {
+		// 			$("#form").on("submit" , function(event) {
+		// 				event.preventDefault();
+		// 				let form = new FormData(this);
+		// 				$("#loader").show();
+		// 				$.ajax({
+		// 					url:"RegisterServlet",
+		// 					type: "POST",
+		// 					data: form,
+		// 					success: function (data, statusText, jqXhr) {
+		// 						console.log(data);
+		// 						$("#loader").hide();
+		// 					},
+		// 					error: function (jqXhr, statusText, errorThrown) {
+		// 						$("#loader").hide();
+		// 						 console.log(jqXhr);
+		// 					},
+		// 					processData: false,
+		// 					contentType: false 
+		// 				})
+		// 			})
+		// 		})
 	</script>
 </body>
 </html>
