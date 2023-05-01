@@ -1,6 +1,9 @@
 package com.patrisrikanth.techblog.dao;
 
+import java.io.InputStream;
 import java.sql.*;
+
+import org.xml.sax.InputSource;
 
 import com.patrisrikanth.techblog.entities.User;
 
@@ -16,13 +19,20 @@ public class UserDao {
 		boolean execStatus = false;
 		
 		try {
-			String query = "INSERT INTO BlogUsers(name, email, password, gender, about) VALUES(? , ? , ? , ? , ?);";
+			String query = "INSERT INTO BlogUsers(name, email, password, gender, about, profile_photo) VALUES(? , ? , ? , ? , ?, ?);";
 			PreparedStatement pstmt = this.con.prepareStatement(query);
 			pstmt.setString(1, user.getName());
 			pstmt.setString(2, user.getEmail());
 			pstmt.setString(3, user.getPassword());
 			pstmt.setString(4, user.getGender());
 			pstmt.setString(5, user.getAbout());
+			
+			InputStream file = null;
+			
+			if(user.getProfilePhoto() != null) {
+				file = user.getProfilePhoto().getInputStream();
+				pstmt.setBlob(6, file);
+			}
 			
 			pstmt.executeUpdate();
 			execStatus = true;
@@ -51,7 +61,6 @@ public class UserDao {
 				user.setAbout(set.getString("about"));
 				user.setRegDate(set.getTimestamp("reg_date"));
 				user.setId(set.getInt("id"));
-				user.setProfile(set.getString("profile"));
 			}
 		} catch(Exception e) {
 			e.printStackTrace();
@@ -78,5 +87,22 @@ public class UserDao {
 		}
 
 		return execStatus;
+	}
+	
+	public Blob getProfilePhoto(int id) {
+		Blob profilePhoto = null;
+		String query = "select * from BlogUsers where id=?";
+		try {
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, id);
+			ResultSet rs = pstmt.executeQuery();
+			if(rs.next()) {
+				profilePhoto = rs.getBlob("profile_photo");
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return profilePhoto;
 	}
 }

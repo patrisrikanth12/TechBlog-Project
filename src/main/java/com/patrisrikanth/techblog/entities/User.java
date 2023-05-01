@@ -2,6 +2,8 @@ package com.patrisrikanth.techblog.entities;
 
 import java.sql.Timestamp;
 
+import jakarta.servlet.http.Part;
+
 public class User {
 	private int id;
 	private String name;
@@ -9,14 +11,14 @@ public class User {
 	private String password;
 	private String gender;
 	private String about;
-	private String profile;
+	private Part profilePhoto;
 	private Timestamp regDate;
 	
 	public User() {
 		
 	}
 	
-	public User(int id, String name, String email, String password, String gender, String about,
+	public User(int id, String name, String email, String password, String gender, String about, Part profilePhoto,
 			Timestamp regDate) {
 		this.id = id;
 		this.name = name;
@@ -24,15 +26,17 @@ public class User {
 		this.password = password;
 		this.gender = gender;
 		this.about = about;
+		this.profilePhoto = profilePhoto;
 		this.regDate = regDate;
 	}
 
-	public User(String name, String email, String password, String gender, String about) {
+	public User(String name, String email, String password, String gender, String about, Part profilePhoto) {
 		this.name = name;
 		this.email = email;
 		this.password = password;
 		this.gender = gender;
 		this.about = about;
+		this.profilePhoto = profilePhoto;
 	}
 	
 	public int getId() {
@@ -83,12 +87,12 @@ public class User {
 		this.about = about;
 	}
 	
-	public String getProfile() {
-		return profile;
+	public Part getProfilePhoto() {
+		return profilePhoto;
 	}
 
-	public void setProfile(String profile) {
-		this.profile = profile;
+	public void setProfilePhoto(Part profilePhoto) {
+		this.profilePhoto = profilePhoto;
 	}
 
 	public Timestamp getRegDate() {

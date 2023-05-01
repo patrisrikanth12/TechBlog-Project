@@ -26,7 +26,7 @@
 	<div class="container mt-5">
 		<div class="row justify-content-center">
 			<div class="col-sm-12 col-md-6 col-lg-4 border p-4 rounded">
-				<form id="form" action="RegisterServlet" method="POST">
+				<form id="form" action="RegisterServlet" method="POST" enctype='multipart/form-data'>
 					<h1 class="text-center mb-2">Register Page</h1>
 					<%
 						if (session.getAttribute("message") != null) {
@@ -67,6 +67,11 @@
 							id="check"> <label class="form-check-label" for="check">agree
 							terms and conditions</label>
 					</div>
+					<div class="form-group mb-2">
+					<label class="form-label" for="profile-photo">profile-photo</label>
+						<input name="profile-photo" type="file" class="form-control"
+							id="profile-photo"> 
+					</div>
 					<br>
 					<div class="container text-center mb-2" id="loader"
 						style="display: none;">
@@ -75,7 +80,7 @@
 						</div>
 						<h4>Please wait..</h4>
 					</div>
-					<button id="sumbimt-btn" type="submit" class="btn btn-primary mb-2">Submit</button>
+					<button id="submit-btn" type="submit" class="btn btn-primary mb-2">Submit</button>
 				</form>
 			</div>
 		</div>

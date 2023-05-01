@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
+import jakarta.servlet.http.Part;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,8 +32,9 @@ public class RegisterServlet extends HttpServlet {
 		String gender = request.getParameter("gender");
 		String about = request.getParameter("about");
 		String check = request.getParameter("check");
+		Part profilePhoto = request.getPart("profile-photo");
 		
-		User user = new User(name, email, password, gender, about);
+		User user = new User(name, email, password, gender, about, profilePhoto);
 		
 		Connection con = new ConnectionProvider().getConnection();
 		

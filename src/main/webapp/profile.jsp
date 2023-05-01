@@ -1,6 +1,12 @@
+<%@page import="java.io.FileOutputStream"%>
+<%@page import="com.patrisrikanth.techblog.helpers.ConnectionProvider"%>
+<%@page import="java.sql.Connection"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page errorPage="error.jsp" import="com.patrisrikanth.techblog.entities.User"%>
+<%@ page errorPage="error.jsp" import="com.patrisrikanth.techblog.entities.User, 
+				com.patrisrikanth.techblog.dao.UserDao, 
+				java.sql.Connection, java.sql.Blob,
+				java.io.File"%>
 <% 
 
 	User user = (User) session.getAttribute("current_user");
@@ -30,7 +36,31 @@
 	
 	<div class="container text-center">
 		<h1 class="mt-3">Profile Info</h1>
-	<img class="img-fluid mt-2" src="img/<%= user.getProfile() %>" style="max-width: 250px" alt="profile image">
+	<%  	
+		Connection conn = new ConnectionProvider().getConnection();
+		UserDao userDao = new UserDao(conn);
+		Blob profilePhoto = userDao.getProfilePhoto(user.getId());
+		if(profilePhoto != null) {
+			 byte[] bytes = profilePhoto.getBytes(1, (int) profilePhoto.length());
+			 try {
+				 var seperator = System.getProperty("file.separator");
+				 File imageFile = new File(session.getServletContext().getRealPath("/") +  user.getId() + ".jpg");
+				 boolean isCreated = imageFile.createNewFile();
+				 if(isCreated) {
+					 FileOutputStream stream = new FileOutputStream(session.getServletContext().getRealPath("/")  + user.getId() + ".jpg");
+					 stream.write(bytes);
+					 stream.close();
+				 } else {
+					 System.out.println("Profile photo already exists");
+				 }
+			 } catch(Exception e) {
+				 e.printStackTrace();
+			 }
+		} else {
+			out.write("<h3> No profile photo available </h3>");
+		}
+	%>	
+	<img src="<%=user.getId()%>.jpg" alt="profile photo" style="max-width: 50%"/>
 	<table class="table mt-5">
 		<tr>
 			<td>name</td>
@@ -55,6 +85,5 @@
 	</table>
 	<a href="edit-profile.jsp" class="btn btn-outline-primary">Edit Profile</a>
 	</div>
-	
 </body>
 </html>
