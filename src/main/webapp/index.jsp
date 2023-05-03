@@ -1,4 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
+<%@page import="com.patrisrikanth.techblog.entities.BlogPost"%>
+<%@page import="com.patrisrikanth.techblog.entities.Category"%>
+<%@page import="java.util.ArrayList"%>
+<%@page import="com.patrisrikanth.techblog.helpers.ConnectionProvider"%>
+<%@page import="com.patrisrikanth.techblog.dao.BlogPostDao"%>
+<%@page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -27,146 +32,73 @@
 
 	<main>
 		<div class="container">
+			<%
+			if (session.getAttribute("current_user") == null) {
+			%>
 			<section class="hero-section py-5 m-0">
 				<h1 class="text-center mb-3">Welcome to TechBlog</h1>
 				<p class="text-center">The hassle-free blogging platform for
 					engineers, thought-leaders, and the dev community!</p>
-				
-				<% if(session.getAttribute("current_user") == null) { %>
-						<div class="d-flex flex-row justify-content-center mb-5">
-						<a href="register.jsp" class="btn btn-outline-primary mx-3">Start for
-							Free</a>
-						<a href="login.jsp" class="btn btn-outline-primary">Login</a>
+				<div class="d-flex flex-row justify-content-center mb-5">
+					<a href="register.jsp" class="btn btn-outline-primary mx-3">Start
+						for Free</a> <a href="login.jsp" class="btn btn-outline-primary">Login</a>
 				</div>
-				<% } %> 
 			</section>
-			<section class="blogs-section py-1 m-0">
-			<h2 class="text-center mb-4">Blog Posts</h2>
-				<div class="container">
-					<div class="row ">
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3" >
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
-						</div>
-						<div class="col-md-4 col-lg-3 col-sm-12 mb-3">
-							<div class="card">
-								<div class="card-body">
-									<h5 class="card-title">Card title</h5>
-									<p class="card-text">Some quick example text to build on
-										the card title and make up the bulk of the card's content.</p>
-									<a href="#" class="btn btn-primary">Go somewhere</a>
-								</div>
-							</div>
+			<%
+			} else {
+			%>
+			<section class="blogs-section row py-1 mt-3">
+				<div class="col-lg-3 col-md-4 col-sm-12">
+					<ul class="list-group">
+						<li class="list-group-item  <%= (request.getParameter("cid") == null) ? "active" : " " %>">
+							<a class="text-decoration-none <%= (request.getParameter("cid") == null) ? "text-white" : " " %>" href="index.jsp">All Posts</a>
+						</li>
+						<% 
+							BlogPostDao blogPostDao = new BlogPostDao(new ConnectionProvider().getConnection());
+							ArrayList<Category> categories = blogPostDao.getAllCategories();
+							for(Category cat: categories) {
+								int current_cid = 0;
+								if(request.getParameter("cid") != null) {
+									current_cid = Integer.parseInt(request.getParameter("cid"));
+								}
+						%>
+						<li class="list-group-item <%= (current_cid == cat.getId()) ? "active" : " " %>">
+							<a 
+								class="text-decoration-none <%= (current_cid == cat.getId()) ? "text-white" : " " %>" 
+								href="index.jsp?cid=<%= cat.getId() %>" > 
+								<%= cat.getCategory() %> 
+							</a>
+						</li>
+						<%
+							}
+						%>
+					</ul>
+				</div>
+				<div class="col-lg-9 col-md-8 col-sm-12">
+					<%	
+						ArrayList<BlogPost> posts;
+						 if(request.getParameter("cid") == null) {
+							 posts = blogPostDao.getAllPosts();
+						 } else {
+							 int cid = Integer.parseInt(request.getParameter("cid"));
+							 posts = blogPostDao.getPostsByCategory(cid);
+						 }
+						 
+						 for(BlogPost post: posts) {
+					%>
+					<div class="card mb-1">
+						<div class="card-body">
+							<h3 class="card-title text-truncate"><%= post.getTitle() %></h3>
+							<h6 class="card-subtitle text-muted mb-1 text-truncate"><%= post.getRegDate() %></h6> 
+							<p class="card-text text-truncate"><%= post.getBody() %></p>
 						</div>
 					</div>
+					<% 
+						 }
+					%>
 				</div>
 			</section>
+			<% } %>
 		</div>
 	</main>
 </body>

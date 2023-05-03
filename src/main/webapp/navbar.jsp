@@ -39,6 +39,8 @@
 				<% } else { 
 				%>
 				<li class="nav-item"><a class="nav-link active"
+					aria-current="page" href="add-blogpost.jsp">Add Blogpost</a></li>
+				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="profile.jsp"><%= nb_user.getName() %></a></li>
 				<li class="nav-item"><a class="nav-link active"
 					aria-current="page" href="LogoutServlet">Logout</a></li>

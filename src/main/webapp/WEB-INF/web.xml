@@ -49,4 +49,14 @@
     <servlet-name>EditProfileServlet</servlet-name>
     <url-pattern>/EditProfileServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>AddBlogPostServlet</display-name>
+    <servlet-name>AddBlogPostServlet</servlet-name>
+    <servlet-class>com.patrisrikanth.techblog.servlets.AddBlogPostServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>AddBlogPostServlet</servlet-name>
+    <url-pattern>/AddBlogPostServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
