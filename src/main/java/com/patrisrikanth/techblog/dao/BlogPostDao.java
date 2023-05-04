@@ -103,4 +103,27 @@ public class BlogPostDao {
 		
 		return posts;
 	}
+	
+	public BlogPost getPostById(int id) {
+		BlogPost post = new BlogPost();
+		
+		String query = "SELECT * FROM BlogPosts where id=?;";
+		
+		try {
+			PreparedStatement pstmt = this.conn.prepareCall(query);
+			pstmt.setInt(1, id);
+			ResultSet resultSet = pstmt.executeQuery();
+			if(resultSet.next()) {
+				post.setId(id);
+				post.setCid(resultSet.getInt("cid"));
+				post.setTitle(resultSet.getString("title"));
+				post.setBody(resultSet.getString("body"));
+				post.setRegDate(resultSet.getTimestamp("reg_date"));
+			}
+		} catch( Exception e) {
+			e.printStackTrace();
+		}
+		
+		return post;
+	}
 }

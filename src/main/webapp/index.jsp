@@ -47,8 +47,8 @@
 			<%
 			} else {
 			%>
-			<section class="blogs-section row py-1 mt-3">
-				<div class="col-lg-3 col-md-4 col-sm-12">
+			<section class="blogs-section row py-1">
+				<div class="col-lg-3 col-md-4 col-sm-12 my-3">
 					<ul class="list-group">
 						<li class="list-group-item  <%= (request.getParameter("cid") == null) ? "active" : " " %>">
 							<a class="text-decoration-none <%= (request.getParameter("cid") == null) ? "text-white" : " " %>" href="index.jsp">All Posts</a>
@@ -89,8 +89,9 @@
 					<div class="card mb-1">
 						<div class="card-body">
 							<h3 class="card-title text-truncate"><%= post.getTitle() %></h3>
-							<h6 class="card-subtitle text-muted mb-1 text-truncate"><%= post.getRegDate() %></h6> 
+							<h6 class="card-subtitle text-muted mb-1 text-truncate"><%= post.getRegDate().toLocaleString() %></h6> 
 							<p class="card-text text-truncate"><%= post.getBody() %></p>
+							<a href="blogpost.jsp?id=<%= post.getId() %>" class="btn btn-outline-primary btn-sm">Read More</a>
 						</div>
 					</div>
 					<% 
