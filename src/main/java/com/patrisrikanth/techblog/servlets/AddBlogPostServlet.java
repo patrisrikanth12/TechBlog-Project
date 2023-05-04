@@ -12,6 +12,7 @@ import java.io.IOException;
 import com.patrisrikanth.techblog.dao.BlogPostDao;
 import com.patrisrikanth.techblog.entities.BlogPost;
 import com.patrisrikanth.techblog.entities.Message;
+import com.patrisrikanth.techblog.entities.User;
 import com.patrisrikanth.techblog.helpers.ConnectionProvider;
 
 public class AddBlogPostServlet extends HttpServlet {
@@ -20,8 +21,10 @@ public class AddBlogPostServlet extends HttpServlet {
 		String title = request.getParameter("title");
 		String body = request.getParameter("body");
 		int categoryId = Integer.parseInt(request.getParameter("category"));
+		User currentUser =  (User) request.getSession().getAttribute("current_user");
+		int uid = currentUser.getId();
 		
-		BlogPost post = new BlogPost(categoryId, title, body);
+		BlogPost post = new BlogPost(categoryId, uid, title, body);
 		BlogPostDao blogPostDao = new BlogPostDao(new ConnectionProvider().getConnection());
 		boolean execStatus = blogPostDao.saveBlogPost(post);
 		if(execStatus) {

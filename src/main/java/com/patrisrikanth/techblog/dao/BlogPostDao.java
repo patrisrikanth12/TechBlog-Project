@@ -40,12 +40,12 @@ public class BlogPostDao {
 	public boolean saveBlogPost(BlogPost post) {
 		boolean execStatus = false;
 		try {
-			String query = "INSERT INTO BlogPosts(title, body, cid) values(?, ?, ?);";
+			String query = "INSERT INTO BlogPosts(title, body, cid, uid) values(?, ?, ?, ?);";
 			PreparedStatement pstmt = this.conn.prepareStatement(query);
 			pstmt.setString(1, post.getTitle());
 			pstmt.setString(2, post.getBody());
 			pstmt.setInt(3, post.getCid());
-			
+			pstmt.setInt(4, post.getUid());
 			pstmt.execute();
 			execStatus = true;
 		} catch(Exception e) {
@@ -65,6 +65,7 @@ public class BlogPostDao {
 			 while(resultSet.next()) {
 				 BlogPost post = new BlogPost();
 				 post.setId(resultSet.getInt("id"));
+				 post.setUid(resultSet.getInt("uid"));
 				 post.setTitle(resultSet.getString("title"));
 				 post.setBody(resultSet.getString("body"));
 				 post.setCid(resultSet.getInt("cid"));
@@ -90,6 +91,7 @@ public class BlogPostDao {
 			 while(resultSet.next()) {
 				 BlogPost post = new BlogPost();
 				 post.setId(resultSet.getInt("id"));
+				 post.setUid(resultSet.getInt("uid"));
 				 post.setTitle(resultSet.getString("title"));
 				 post.setBody(resultSet.getString("body"));
 				 post.setCid(resultSet.getInt("cid"));
@@ -116,6 +118,7 @@ public class BlogPostDao {
 			if(resultSet.next()) {
 				post.setId(id);
 				post.setCid(resultSet.getInt("cid"));
+				post.setUid(resultSet.getInt("uid"));
 				post.setTitle(resultSet.getString("title"));
 				post.setBody(resultSet.getString("body"));
 				post.setRegDate(resultSet.getTimestamp("reg_date"));

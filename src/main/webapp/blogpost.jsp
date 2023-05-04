@@ -1,3 +1,4 @@
+<%@page import="com.patrisrikanth.techblog.dao.UserDao"%>
 <%@page import="com.patrisrikanth.techblog.entities.BlogPost"%>
 <%@page import="com.patrisrikanth.techblog.helpers.ConnectionProvider"%>
 <%@page import="com.patrisrikanth.techblog.dao.BlogPostDao"%>
@@ -41,10 +42,12 @@ BlogPost post = blogPostDao.getPostById(postId);
 				<h1><%=post.getTitle()%></h1> 
 				<div class="d-flex flex-row justify-content-between mb-3">
 					<p class="text-muted"><%=post.getRegDate().toLocaleString()%></p>
-					<p><%=post.getId()%>
+					
+					<% UserDao userDao = new UserDao(new ConnectionProvider().getConnection());  %>
+					<p> <%= userDao.getUserById(post.getUid()).getName() %> </p>
 				</div>
 				<p>
-					<%=post.getBody()%>
+					<%= post.getBody() %>
 				</p>
 				<div class="d-flex flex-row">
 					<i class="bi bi-hand-thumbs-up"></i>10 | <i class="bi bi-chat-left"></i>10

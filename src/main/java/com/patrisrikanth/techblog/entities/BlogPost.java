@@ -5,6 +5,7 @@ import java.sql.Timestamp;
 public class BlogPost {
 	private int id;
 	private int cid;
+	private int uid;
 	private String title;
 	private String body;
 	private Timestamp regDate;
@@ -13,19 +14,20 @@ public class BlogPost {
 		
 	}
 	
-	
-	public BlogPost(int id, int cid, String title, String body, Timestamp regDate) {
+	public BlogPost(int id, int cid, int uid, String title, String body, Timestamp regDate) {
 		super();
 		this.id = id;
 		this.cid = cid;
+		this.uid = uid;
 		this.title = title;
 		this.body = body;
 		this.regDate = regDate;
 	}
 
-	public BlogPost(int cid, String title, String body) {
+	public BlogPost(int cid, int uid, String title, String body) {
 		super();
 		this.cid = cid;
+		this.uid = uid;
 		this.title = title;
 		this.body = body;
 	}
@@ -60,6 +62,12 @@ public class BlogPost {
 	public void setRegDate(Timestamp regDate) {
 		this.regDate = regDate;
 	}
-	
-	
+
+	public int getUid() {
+		return uid;
+	}
+
+	public void setUid(int uid) {
+		this.uid = uid;
+	}
 }

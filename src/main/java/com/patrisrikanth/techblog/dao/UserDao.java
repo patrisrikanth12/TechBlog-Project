@@ -105,4 +105,29 @@ public class UserDao {
 		
 		return profilePhoto;
 	}
+	
+	public User getUserById(int id) {
+		User user = null;
+		try {
+			String query = "select * from BlogUsers where id=?";
+			PreparedStatement pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, id);
+			ResultSet set = pstmt.executeQuery();
+			
+			if(set.next()) {
+				user = new User();
+				user.setName(set.getString("name"));
+				user.setEmail(set.getString("email"));
+				user.setPassword(set.getString("password"));
+				user.setGender(set.getString("gender"));
+				user.setAbout(set.getString("about"));
+				user.setRegDate(set.getTimestamp("reg_date"));
+				user.setId(set.getInt("id"));
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return user;
+	}
 }
