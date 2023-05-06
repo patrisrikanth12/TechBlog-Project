@@ -1,3 +1,5 @@
+<%@page import="java.sql.Connection"%>
+<%@page import="com.patrisrikanth.techblog.dao.LikeDao"%>
 <%@page import="com.patrisrikanth.techblog.dao.UserDao"%>
 <%@page import="com.patrisrikanth.techblog.entities.BlogPost"%>
 <%@page import="com.patrisrikanth.techblog.helpers.ConnectionProvider"%>
@@ -32,6 +34,9 @@ BlogPost post = blogPostDao.getPostById(postId);
 	crossorigin="anonymous"></script>
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+	<script src="https://code.jquery.com/jquery-3.6.4.js"
+	integrity="sha256-a9jBBRygX1Bh5lt8GZjXDzyOB+bWve9EiO7tROUtj/E="
+	crossorigin="anonymous"></script>
 </head>
 <body>
 	<%@include file="navbar.jsp"%>
@@ -43,17 +48,45 @@ BlogPost post = blogPostDao.getPostById(postId);
 				<div class="d-flex flex-row justify-content-between mb-3">
 					<p class="text-muted"><%=post.getRegDate().toLocaleString()%></p>
 					
-					<% UserDao userDao = new UserDao(new ConnectionProvider().getConnection());  %>
+					<% 
+						Connection conn = new ConnectionProvider().getConnection();
+						UserDao userDao = new UserDao(conn);
+						LikeDao likeDao = new LikeDao(conn);
+					%>
 					<p> <%= userDao.getUserById(post.getUid()).getName() %> </p>
 				</div>
 				<p>
 					<%= post.getBody() %>
 				</p>
-				<div class="d-flex flex-row">
-					<i class="bi bi-hand-thumbs-up"></i>10 | <i class="bi bi-chat-left"></i>10
+				<div>
+					<a href="" onclick="doLike(<%= post.getId()%>, <%= user.getId() %>)">
+						<i class="bi <%= likeDao.isLikedByUser(post.getId(), user.getId()) ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up" %>"></i>
+					</a><%= likeDao.countLikes(post.getId()) %>
 				</div>
 			</div>
 		</div>
 	</div>
+	
+	<script>
+	function doLike(pid, uid) {
+		 
+		 const likeData = {
+			 pid: pid,
+			 uid: uid
+		 }
+		 
+		 $.ajax({
+				url:"BlogPostLikeServlet",
+				type: "POST",
+				data: likeData,
+				success: function (data, statusText, jqXhr) {
+					console.log(data);
+				},
+				error: function (jqXhr, statusText, errorThrown) {
+					 console.log(jqXhr);
+				},
+			})
+	 }  
+	</script>
 </body>
 </html>

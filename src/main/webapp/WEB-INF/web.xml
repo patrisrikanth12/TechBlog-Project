@@ -59,4 +59,14 @@
     <servlet-name>AddBlogPostServlet</servlet-name>
     <url-pattern>/AddBlogPostServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>BlogPostLikeServlet</display-name>
+    <servlet-name>BlogPostLikeServlet</servlet-name>
+    <servlet-class>com.patrisrikanth.techblog.servlets.BlogPostLikeServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>BlogPostLikeServlet</servlet-name>
+    <url-pattern>/BlogPostLikeServlet</url-pattern>
+  </servlet-mapping>
 </web-app>
