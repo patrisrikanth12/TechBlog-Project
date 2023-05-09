@@ -21,14 +21,18 @@ public class BlogPostLikeServlet extends HttpServlet {
 		boolean execStatus = false;
 		
 		LikeDao likeDao = new LikeDao(new ConnectionProvider().getConnection());
-		if(likeDao.isLikedByUser(pid, uid)) {
+		boolean isLiked = likeDao.isLikedByUser(pid, uid);
+		if(isLiked) {
 			execStatus = likeDao.deleteLike(pid, uid);
+			isLiked = false;
 		} else {
 			 execStatus = likeDao.insertLike(pid, uid);
+			 isLiked = true;
 		}
 		PrintWriter out = response.getWriter();
 		if(execStatus) {
-			out.println(likeDao.countLikes(pid));
+			response.setContentType("application/json");
+			out.println("{ \"isLiked\": " + isLiked + " , \"count\": " + likeDao.countLikes(pid) + " }" );
 		} else {
 			response.setStatus(500);
 			out.println("failed");

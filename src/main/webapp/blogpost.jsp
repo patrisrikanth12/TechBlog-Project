@@ -63,34 +63,50 @@ BlogPost post = blogPostDao.getPostById(postId);
 					<%= MdToHtmlConverter.convert(post.getBody()) %>
 				</p>
 				<div>
-					<a href="" onclick="doLike(<%= post.getId()%>, <%= user.getId() %>)">
-						<i class="bi <%= likeDao.isLikedByUser(post.getId(), user.getId()) ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up" %>"></i>
-					</a><%= likeDao.countLikes(post.getId()) %>
+						<i id="like-btn" class="bi <%= likeDao.isLikedByUser(post.getId(), user.getId()) ? "bi-hand-thumbs-up-fill" : "bi-hand-thumbs-up" %>"></i>
+						<span id="likes-count"><%= likeDao.countLikes(post.getId()) %></span>
 				</div>
 			</div>
 		</div>
 	</div>
-	
 	<script>
-	function doLike(pid, uid) {
-		 
-		 const likeData = {
-			 pid: pid,
-			 uid: uid
-		 }
-		 
-		 $.ajax({
-				url:"BlogPostLikeServlet",
-				type: "POST",
-				data: likeData,
-				success: function (data, statusText, jqXhr) {
-					console.log(data);
-				},
-				error: function (jqXhr, statusText, errorThrown) {
-					 console.log(jqXhr);
-				},
-			})
-	 }  
+		const likeBtn = document.getElementById("like-btn");
+		const likesCount = document.getElementById("likes-count");
+		likeBtn.addEventListener("click", function() {
+			console.log("clicked like btn");
+			const xhr = new XMLHttpRequest();
+			
+			xhr.open("POST", "BlogPostLikeServlet" , true);
+			
+			
+			xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+			
+			xhr.onprogress = function() {
+				console.log("on progres ..");
+			}
+			
+			xhr.onload = function() {
+				console.log(this.responseText);
+				const response = JSON.parse(this.responseText);
+				const isLiked = response.isLiked;
+				const count = response.count;
+				console.log(response);
+				
+				if(isLiked) {
+					likeBtn.classList.remove("bi-hand-thumbs-up");
+					likeBtn.classList.add("bi-hand-thumbs-up-fill");
+				} else {
+					likeBtn.classList.remove("bi-hand-thumbs-up-fill");
+					likeBtn.classList.add("bi-hand-thumbs-up");
+				}
+				
+				likesCount.innerText = count;
+			}
+			
+			const data = "pid=<%= post.getId() %>&uid=<%= user.getId() %>";
+			
+			xhr.send(data);
+		})
 	</script>
 </body>
 </html>
