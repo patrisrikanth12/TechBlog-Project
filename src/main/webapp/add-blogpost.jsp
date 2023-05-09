@@ -9,6 +9,8 @@
 <head>
 <meta charset="UTF-8">
 <title>Add New BlogPost</title>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -52,7 +54,7 @@
 						<input type="text" name="title" id="title" class="form-control" />
 					</div>
 					<div class="form-group mb-3">
-						<label class="form-label" for="body">BlogPost Content Here</label>
+						<label class="form-label" for="body">BlogPost Content Here (Write in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">MarkDown</a>)</label>
 						<textarea name="body" id="body" class="form-control" rows="10"></textarea>
 					</div>
 					<div class="text-center mb-3">

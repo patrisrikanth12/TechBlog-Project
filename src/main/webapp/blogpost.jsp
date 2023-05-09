@@ -1,3 +1,4 @@
+<%@page import="com.patrisrikanth.techblog.helpers.MdToHtmlConverter"%>
 <%@page import="java.sql.Connection"%>
 <%@page import="com.patrisrikanth.techblog.dao.LikeDao"%>
 <%@page import="com.patrisrikanth.techblog.dao.UserDao"%>
@@ -23,6 +24,8 @@ BlogPost post = blogPostDao.getPostById(postId);
 <head>
 <meta charset="UTF-8">
 <title><%=post.getTitle()%></title>
+<link rel="stylesheet"
+	href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
 <link
 	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css"
 	rel="stylesheet"
@@ -44,7 +47,7 @@ BlogPost post = blogPostDao.getPostById(postId);
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6 col-md-8 col-sm-12 mt-3">
-				<h1><%=post.getTitle()%></h1> 
+				<h4>Title: <%=post.getTitle()%></h4> 
 				<div class="d-flex flex-row justify-content-between mb-3">
 					<p class="text-muted"><%=post.getRegDate().toLocaleString()%></p>
 					
@@ -55,8 +58,9 @@ BlogPost post = blogPostDao.getPostById(postId);
 					%>
 					<p> <%= userDao.getUserById(post.getUid()).getName() %> </p>
 				</div>
+				<hr>
 				<p>
-					<%= post.getBody() %>
+					<%= MdToHtmlConverter.convert(post.getBody()) %>
 				</p>
 				<div>
 					<a href="" onclick="doLike(<%= post.getId()%>, <%= user.getId() %>)">
