@@ -69,4 +69,14 @@
     <servlet-name>BlogPostLikeServlet</servlet-name>
     <url-pattern>/BlogPostLikeServlet</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>MarkDownPreviewServlet</display-name>
+    <servlet-name>MarkDownPreviewServlet</servlet-name>
+    <servlet-class>com.patrisrikanth.techblog.servlets.MarkDownPreviewServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>MarkDownPreviewServlet</servlet-name>
+    <url-pattern>/MarkDownPreviewServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

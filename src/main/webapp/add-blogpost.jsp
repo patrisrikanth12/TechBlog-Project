@@ -25,8 +25,8 @@
 	<%@ include file="navbar.jsp" %>
 	
 	<div class="container">
-		<div class="row justify-content-center">
-			<div class="col-lg-6 col-md-8 col-sm-12">
+		<div class="row">
+			<div class="col-lg-5 col-md-5 col-sm-12">
 				<form action="AddBlogPostServlet" method="POST" class="my-5 p-3">
 					<h1 class="text-center my-3">Add BlogPost</h1>
 					<% 
@@ -55,14 +55,51 @@
 					</div>
 					<div class="form-group mb-3">
 						<label class="form-label" for="body">BlogPost Content Here (Write in <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">MarkDown</a>)</label>
-						<textarea name="body" id="body" class="form-control" rows="10"></textarea>
+						<textarea name="body" id="body-text" class="form-control" rows="10"></textarea>
 					</div>
 					<div class="text-center mb-3">
 						<button class="btn btn-primary">Add BlogPost</button>
 					</div>
 				</form>
 			</div>
+				<div class="col-lg-5 col-md-5 col-sm-12 my-5 p-3">
+					<h3>Preview</h3>
+					<div id="preview" class="card p-3">
+						
+					</div>
+				</div>
 		</div>
 	</div>
 </body>
+
+<script>
+	const previewEl = document.getElementById("preview");
+	const bodyTextEl = document.getElementById("body-text");
+	
+	bodyTextEl.addEventListener("input" ,function(e) {
+		console.log("text changed");
+		const xhr = new XMLHttpRequest();
+		
+		xhr.open("POST", "MarkDownPreviewServlet", true);
+		xhr.onload = function() {
+			if(this.status == 200) {
+				previewEl.innerHTML = this.responseText;
+				console.log(this.responseText);
+			} else {
+				console.log(this.responseText);
+			}
+		} 
+		
+		const md = {
+			markdown: bodyTextEl.value
+		}
+		
+		let data = new URLSearchParams(Object.entries(md)).toString();
+		
+		xhr.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+		
+		xhr.send(data);
+	})
+</script>
+
 </html>

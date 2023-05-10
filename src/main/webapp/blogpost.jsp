@@ -72,6 +72,7 @@ BlogPost post = blogPostDao.getPostById(postId);
 	<script>
 		const likeBtn = document.getElementById("like-btn");
 		const likesCount = document.getElementById("likes-count");
+		
 		likeBtn.addEventListener("click", function() {
 			console.log("clicked like btn");
 			const xhr = new XMLHttpRequest();
@@ -107,6 +108,7 @@ BlogPost post = blogPostDao.getPostById(postId);
 			
 			xhr.send(data);
 		})
+		
 	</script>
 </body>
 </html>
