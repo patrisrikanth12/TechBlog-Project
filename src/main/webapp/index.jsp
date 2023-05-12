@@ -90,7 +90,6 @@
 						<div class="card-body">
 							<h3 class="card-title text-truncate"><%= post.getTitle() %></h3>
 							<h6 class="card-subtitle text-muted mb-1 text-truncate"><%= post.getRegDate().toLocaleString() %></h6> 
-							<p class="card-text text-truncate"><%= post.getBody() %></p>
 							<a href="blogpost.jsp?id=<%= post.getId() %>" class="btn btn-outline-primary btn-sm">Read More</a>
 						</div>
 					</div>

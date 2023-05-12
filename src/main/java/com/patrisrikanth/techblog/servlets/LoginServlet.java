@@ -19,7 +19,7 @@ import com.patrisrikanth.techblog.helpers.ConnectionProvider;
 public class LoginServlet extends HttpServlet {
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String email = request.getParameter("email");
+		String email = request.getParameter("email").toLowerCase();
 		String password = request.getParameter("password");
 		
 		Connection con = new ConnectionProvider().getConnection();
