@@ -7,6 +7,7 @@ public class ConnectionProvider {
  
 	public Connection getConnection() {
 		try {
+			Class.forName("com.mysql.jdbc.Driver"); 
 			con = DriverManager.getConnection(System.getenv("DB_URL") , System.getenv("DB_USER"), System.getenv("DB_PASSWORD"));
 			System.out.println("DB Connection created successfully");
 		} catch (Exception e) {

@@ -1,85 +1,66 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<!-- WARNING: Eclipse auto-generated file.
-              Any modifications will be overwritten.
-              To include a user specific buildfile here, simply create one in the same
-              directory with the processing instruction <?eclipse.ant.import?>
-              as the first entry and export the buildfile again. --><project basedir="." default="build" name="TechBlog">
-    <property environment="env"/>
-    <property name="debuglevel" value="source,lines,vars"/>
-    <property name="target" value="11"/>
-    <property name="source" value="11"/>
-    <property name="war-file" value="TechBlogProject.war"></property>
-    <property name="src-dir" value="src/main/java"></property>
-    <property name="build-dir" value="src/main/webapp/WEB-INF/classes"></property>
-              	
-    <path id="Server Runtime [Apache Tomcat v10.1].libraryclasspath">
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/catalina-storeconfig.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/catalina.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-dbcp.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/websocket-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-ru.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-util-scan.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-fr.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-zh-CN.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/catalina-tribes.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-ko.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/ecj-4.27.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-coyote.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-websocket.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-jni.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-util.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/catalina-ha.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-pt-BR.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/jsp-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/servlet-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/websocket-client-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/el-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/jasper-el.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/annotations-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/catalina-ssi.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/jakartaee-migration-1.0.6-shaded.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-ja.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/catalina-ant.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/jasper.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-jdbc.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-de.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-cs.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/mysql-connector-java-8.0.11.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/jaspic-api.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/commonmark-0.9.0.jar"/>
-        <pathelement location="../../../Downloads/apache-tomcat-10.1.8/lib/tomcat-i18n-es.jar"/>
-    </path>
-    <path id="Web App Libraries.libraryclasspath">
-        <pathelement location="src/main/webapp/WEB-INF/classes"/>
-    </path>
-    <path id="EAR Libraries.libraryclasspath"/>
-    <path id="TechBlog.classpath">
-        <pathelement location="build/classes"/>
-        <path refid="Server Runtime [Apache Tomcat v10.1].libraryclasspath"/>
-        <path refid="Web App Libraries.libraryclasspath"/>
-        <path refid="EAR Libraries.libraryclasspath"/>
-    </path>
-    <target name="init">
-        <mkdir dir="src/main/webapp/WEB-INF/classes"/>
-        <copy includeemptydirs="false" todir="src/main/webapp/WEB-INF/classes">
-            <fileset dir="src/main/java">
-                <exclude name="**/*.java"/>
-            </fileset>
-        </copy>
-    </target>
-    <target name="clean">
-        <delete dir="src/main/webapp/WEB-INF/classes"/>
-    </target>
-    <target depends="clean" name="cleanall"/>
-    <target depends="build-subprojects,build-project" name="build"/>
-    <target name="build-subprojects"/>
-    <target depends="clean,init" name="build-project">
-        <echo message="${ant.project.name}: ${ant.file}"/>
-        <javac debug="true" debuglevel="${debuglevel}" destdir="src/main/webapp/WEB-INF/classes" includeantruntime="false" source="${source}" target="${target}">
-            <src path="src/main/java"/>
-            <classpath refid="TechBlog.classpath"/>
-        </javac>
-    </target>
-    <target description="Build all projects which reference this project. Useful to propagate changes." name="build-refprojects"/>   	
+<?xml version="1.0" encoding="UTF-8"?>
+<project basedir="." default="package" name="TechBlog">
+	<!--
+	This script assumes:
+	1) CATALINA_HOME environment variable points to tomcat's directory
+	2) Following Folder Structure
+	./ (project root)
+	|- src/ (project.src.dir - source folder)
+	|- build/ 
+	|  |- classes/ (project.classes.dir)
+	|- WebContent/ (project.web.dir)
+	|  |- lib/  (project.lib.dir)
+	|- PROJECT_NAME.war (project.war)
+	3) JAVA_HOME is set and point to JDK 1.6 and above
+	
+	-->
+	<property environment="env" />
+	<property name="TOMCAT_HOME" value="../../../Downloads/apache-tomcat-10.1.8" />
+	<property name="debuglevel" value="source,lines,vars" />
+	<property name="target" value="11" />
+	<property name="source" value="11" />
+	<property name="project.name" value="${ant.project.name}" />
+	<property name="project.web.dir" value="src/main/webapp" />
+	<property name="project.src.dir" value="src" />
+	<property name="project.classes.dir" value="src/main/webapp/WEB-INF/classes" />
+	<property name="project.lib.dir" value="${project.web.dir}/WEB-INF/lib" />
+	<property name="project.war" value="${project.name}.war" />
+	<property name="project.runtime.lib" value="${TOMCAT_HOME}/lib" />
+	<property name="project.deploy.location" value="${TOMCAT_HOME}/webapps" />
+
+	<path id="classpath.runtime">
+		<fileset dir="${project.runtime.lib}" includes="*.jar" />
+	</path>
+	<path id="classpath.lib">
+		<fileset dir="${project.lib.dir}" includes="*.jar" />
+	</path>
+	<path id="project.classpath">
+		<pathelement location="${project.classes.dir}" />
+		<path refid="classpath.runtime" />
+		<path refid="classpath.lib" />
+	</path>
+	<target name="clean">
+		<delete dir="${project.classes.dir}" />
+		<delete dir="${project.war}" />
+	</target>
+
+	<target name="build" description="Compiling all java files in ${project.src.dir}">
+		<echo message="${project.name}: ${ant.file}" />
+		<javac debug="true" debuglevel="${debuglevel}" destdir="${project.classes.dir}" includeantruntime="false" source="${source}" target="${target}">
+			<src path="src" />
+			<classpath refid="project.classpath" />
+		</javac>
+	</target>
+	<target depends="build" name="package" description="Packagign all files into ${project.war}">
+		<war destfile="${project.war}" index="true" needxmlfile="fasle">
+			<classes dir="${project.classes.dir}" />
+			<lib dir="${project.lib.dir}" />
+			<fileset dir="${project.web.dir}">
+				<include name="**/*.*" />
+			</fileset>
+		</war>
+	</target>
+	<target depends="package" name="deploy" description="Copying ${project.war} to ${project.deploy.location}">
+		<copy file="${project.war}" todir="${project.deploy.location}" />
+	</target>
 </project>
