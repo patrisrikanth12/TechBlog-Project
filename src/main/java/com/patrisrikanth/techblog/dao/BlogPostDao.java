@@ -129,4 +129,29 @@ public class BlogPostDao {
 		
 		return post;
 	}
+	
+	public ArrayList<BlogPost> getPostsByUserId(int uid) {
+		String query = "SELECT * FROM BlogPosts where uid=?";
+		ArrayList<BlogPost> posts = new ArrayList<BlogPost>();
+		try {
+			PreparedStatement pstmt = this.conn.prepareStatement(query);
+			pstmt.setInt(1, uid);
+			ResultSet resultSet = pstmt.executeQuery();
+			while(resultSet.next()) {
+				BlogPost post = new BlogPost();
+				post.setTitle(resultSet.getString("title"));
+				post.setBody(resultSet.getString("body"));
+				post.setId(resultSet.getInt("id"));
+				post.setCid(resultSet.getInt("cid"));
+				post.setUid(resultSet.getInt("uid"));
+				post.setRegDate(resultSet.getTimestamp("reg_date"));	
+				posts.add(post);
+			}
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return posts;
+	}
 }

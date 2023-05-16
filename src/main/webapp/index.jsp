@@ -47,58 +47,79 @@
 			<%
 			} else {
 			%>
-			<section class="blogs-section row py-1">
-				<div class="col-lg-3 col-md-4 col-sm-12 my-3">
+			<section class="blogs-section row py-1 mt-3">
+				<div class="col-lg-3 col-md-4 col-sm-12">
 					<ul class="list-group">
-						<li class="list-group-item  <%= (request.getParameter("cid") == null) ? "active" : " " %>">
-							<a class="text-decoration-none <%= (request.getParameter("cid") == null) ? "text-white" : " " %>" href="index.jsp">All Posts</a>
-						</li>
-						<% 
-							BlogPostDao blogPostDao = new BlogPostDao(new ConnectionProvider().getConnection());
-							ArrayList<Category> categories = blogPostDao.getAllCategories();
-							for(Category cat: categories) {
-								int current_cid = 0;
-								if(request.getParameter("cid") != null) {
-									current_cid = Integer.parseInt(request.getParameter("cid"));
-								}
-						%>
-						<li class="list-group-item <%= (current_cid == cat.getId()) ? "active" : " " %>">
-							<a 
-								class="text-decoration-none <%= (current_cid == cat.getId()) ? "text-white" : " " %>" 
-								href="index.jsp?cid=<%= cat.getId() %>" > 
-								<%= cat.getCategory() %> 
-							</a>
+						<li
+							class="list-group-item  <%=(request.getParameter("cid") == null) ? "active" : " "%>">
+							<a
+							class="text-decoration-none <%=(request.getParameter("cid") == null) ? "text-white" : " "%>"
+							href="index.jsp">All Posts</a>
 						</li>
 						<%
+						BlogPostDao blogPostDao = new BlogPostDao(new ConnectionProvider().getConnection());
+						ArrayList<Category> categories = blogPostDao.getAllCategories();
+						for (Category cat : categories) {
+							int current_cid = 0;
+							if (request.getParameter("cid") != null) {
+								current_cid = Integer.parseInt(request.getParameter("cid"));
 							}
+						%>
+						<li
+							class="list-group-item <%=(current_cid == cat.getId()) ? "active" : " "%>">
+							<a
+							class="text-decoration-none <%=(current_cid == cat.getId()) ? "text-white" : " "%>"
+							href="index.jsp?cid=<%=cat.getId()%>"> <%=cat.getCategory()%>
+						</a>
+						</li>
+						<%
+						}
 						%>
 					</ul>
 				</div>
 				<div class="col-lg-9 col-md-8 col-sm-12">
-					<%	
-						ArrayList<BlogPost> posts;
-						 if(request.getParameter("cid") == null) {
-							 posts = blogPostDao.getAllPosts();
-						 } else {
-							 int cid = Integer.parseInt(request.getParameter("cid"));
-							 posts = blogPostDao.getPostsByCategory(cid);
-						 }
-						 
-						 for(BlogPost post: posts) {
+					<%
+					ArrayList<BlogPost> posts;
+					if (request.getParameter("cid") == null) {
+						posts = blogPostDao.getAllPosts();
+					} else {
+						int cid = Integer.parseInt(request.getParameter("cid"));
+						posts = blogPostDao.getPostsByCategory(cid);
+					}
+
+					if (posts.size() != 0) {
+
+						for (BlogPost post : posts) {
 					%>
 					<div class="card mb-1">
-						<div class="card-body">
-							<h3 class="card-title text-truncate"><%= post.getTitle() %></h3>
-							<h6 class="card-subtitle text-muted mb-1 text-truncate"><%= post.getRegDate().toLocaleString() %></h6> 
-							<a href="blogpost.jsp?id=<%= post.getId() %>" class="btn btn-outline-primary btn-sm">Read More</a>
+						<div
+							class="card-body d-flex flex-row justify-content-between align-items-center ">
+							<div>
+								<h3 class="card-title text-truncate"><%=post.getTitle()%></h3>
+								<h6 class="card-subtitle text-muted mb-1 text-truncate"><%=post.getRegDate().toLocaleString()%></h6>
+							</div>
+							<a href="blogpost.jsp?id=<%=post.getId()%>"> <span
+								class="material-symbols-outlined rounded border"> chevron_right </span>
+							</a>
 						</div>
 					</div>
-					<% 
-						 }
+					<%
+						}
+					} else {
+					%>
+					<div class="d-flex flex-column my-3 align-items-center w-100">
+						<img alt="no posts available" src="img/no-posts-available.svg"
+							style="width: 60%">
+						<h3 class="text-center my-3">No Posts Available</h3>
+					</div>
+					<%
+					}
 					%>
 				</div>
 			</section>
-			<% } %>
+			<%
+			}
+			%>
 		</div>
 	</main>
 </body>
