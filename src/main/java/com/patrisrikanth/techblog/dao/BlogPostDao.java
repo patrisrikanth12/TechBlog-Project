@@ -154,4 +154,19 @@ public class BlogPostDao {
 		
 		return posts;
 	}
+	
+	public boolean deletePostById(int id) {
+		boolean execStatus = false;
+		String query = "DELETE FROM BlogPosts where id=?";
+		try {
+			PreparedStatement pstmt = this.conn.prepareStatement(query);
+			pstmt.setInt(1, id);
+			pstmt.execute();
+			execStatus = true;
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		
+		return execStatus;
+	}
 }

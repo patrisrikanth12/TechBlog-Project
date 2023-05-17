@@ -4,14 +4,29 @@ import java.sql.Timestamp;
 
 import jakarta.servlet.http.Part;
 
+import jakarta.validation.constraints.*;
+
 public class User {
 	private int id;
+	
+	@NotBlank(message = "Name is required")
 	private String name;
+	
+	@NotBlank(message = "Email is required")
+	@Email(message= "Please enter valid email")
 	private String email;
+	
+	@NotBlank(message="Password can't be empty")
+	@Size(min=8, max=24, message="Password should atleast contain 8 characters and atmost 24 characters")
 	private String password;
+	
+	@NotBlank(message="Gender is required")
 	private String gender;
+	
 	private String about;
+	
 	private Part profilePhoto;
+	
 	private Timestamp regDate;
 	
 	public User() {

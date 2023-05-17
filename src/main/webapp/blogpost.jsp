@@ -43,12 +43,12 @@ BlogPost post = blogPostDao.getPostById(postId);
 </head>
 <body>
 	<%@include file="navbar.jsp"%>
-
+	
 	<div class="container">
 		<div class="row justify-content-center">
 			<div class="col-lg-6 col-md-8 col-sm-12 mt-3">
 				<h4>Title: <%=post.getTitle()%></h4> 
-				<div class="d-flex flex-row justify-content-between mb-3">
+				<div class="d-flex flex-row justify-content-between">
 					<p class="text-muted"><%=post.getRegDate().toLocaleString()%></p>
 					
 					<% 
@@ -56,8 +56,15 @@ BlogPost post = blogPostDao.getPostById(postId);
 						UserDao userDao = new UserDao(conn);
 						LikeDao likeDao = new LikeDao(conn);
 					%>
-					<p> <%= userDao.getUserById(post.getUid()).getName() %> </p>
+					
+					<div>
+						<p> Posted By: <%= userDao.getUserById(post.getUid()).getName() %> </p>
+					</div>
 				</div>
+				<% if(user.getId() == post.getUid()) { %>
+					<a href="DeletePostServlet?pid=<%= post.getId() %>" class="btn btn-outline-danger btn-sm">Delete Post</a>
+					<a class="btn btn-outline-primary btn-sm">Edit Post</a>
+				<% } %> 
 				<hr>
 				<p>
 					<%= MdToHtmlConverter.convert(post.getBody()) %>
